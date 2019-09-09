@@ -32,6 +32,7 @@
   <?php
     echo "<p>Lehe avamise hetkel oli " .$partOfDay ."</p>"
    ?>
+   <hr>
 
 
 
