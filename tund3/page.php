@@ -31,6 +31,14 @@
 	$durationValue = $semesterDuration->format("%r%a");
 	//echo $testValue;
 	//<meter min="0" max="155" value="33">Väärtus</meter>
+  if($elapsedvalue < 0) {
+    $semesterInfoHTML = "<p> Semester pole veel alanud! </p>";
+  }
+
+  if($elapsedvalue > $semesterDuration) {
+    $semesterInfoHTML = "<p> Semester on juba läbi! </p>"
+  }
+
 	if($elapsedValue > 0){
 		$semesterInfoHTML = "<p>Semester on täies hoos: ";
 		$semesterInfoHTML .= '<meter min="0" max="' .$durationValue .'" ';

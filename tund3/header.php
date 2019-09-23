@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="et">
 <head>
-  <meta charset="utf-8">
-  <title>
-    <?php
-	  echo $userName;
+<?php
+	  echo "<title>" .$userName ."progeb veebi "."</title>";
+    echo "<meta charset="utf-8">";
 	?>
-    progeb veebi</title>
+
 </head>
