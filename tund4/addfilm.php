@@ -46,10 +46,17 @@
     <input type="submit" value="Salvesta filmi info" name="submitFilm">
   </form>
 
-  <?php
+
+<?php
   // echo "Server: " .$serverHost .", kasutaja: " .$serverUsername;
   // echo $filmInfoHTML;
-   ?>
+  if(isset($_POST["submitFilm"])) {
+
+    if(empty($_POST["filmTitle"])) {
+      echo "<p style='color:red;'>" ."Filmi pealkiri ei tohi olla tühi! </p>";
+    }
+  }
+?>
 
 </body>
 </html>

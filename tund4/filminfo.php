@@ -6,6 +6,7 @@
   $database = "if19_marten_1";
 
   $filmInfoHTML = readAllFilms();
+  $filmInfo50 = readFilmsOlder50();
 
 	//lisame lehe päise
 	require("header.php");
@@ -24,7 +25,14 @@
   <?php
   // echo "Server: " .$serverHost .", kasutaja: " .$serverUsername;
   echo $filmInfoHTML;
-  
+  ?>
+
+  <hr>
+  <h2>Eesti filmid vanemad kui 50 aastat</h2>
+  <p>Praegu on andmebaasis järgmised filmid:</p>
+  <?php
+  echo $filmInfo50;
+
    ?>
 
 </body>
