@@ -47,9 +47,9 @@
     } //eesnime kontrolli lõpp
 
     //ajutine
-    $surname = test_input($_POST["surName"]);
-    $gender = test_input($_POST["gender"]);
-    $email = test_input($_POST["email"]);
+    // $surname = test_input($_POST["surName"]);
+    // $gender = test_input($_POST["gender"]);
+    // $email = test_input($_POST["email"]);
     //strlen($_POST["password"])<8    siis on liiga lühike
 
     //kontrollime, kas sünniaeg sisestati ja kas on korrektne
@@ -57,6 +57,34 @@
   	  $birthDay = intval($_POST["birthDay"]);
     } else {
   	  $birthDayError = "Palun vali sünnikuupäev!";
+    }
+
+    if(isset($_POST["surName"]) and !empty($_POST["surName"])){
+  	  $surname = test_input($_POST["surName"]);
+    } else {
+  	  $surnameError = "Palun sisestage perekonnanimi!";
+    }
+
+    if(isset($_POST["gender"]) and !empty($_POST["gender"])){
+  	  $gender = test_input($_POST["gender"]);
+    } else {
+  	  $genderError = "Palun sisestage sugu!";
+    }
+
+    if(isset($_POST["email"]) and !empty($_POST["email"])){
+  	  $email = test_input($_POST["email"]);
+    } else {
+  	  $emailError = "Palun sisestage email!";
+    }
+
+    if(isset($_POST["password"]) and !empty($_POST["password"]) and strlen($_POST["password"]) > 8 and $_POST["password"] == $_POST["confirmpassword"]){
+  	  $password = $_POST["password"];
+    } elseif(strlen($_POST["password"]) < 8) {
+      $passwordError = "Salasõna peab olema vähemalt 8 tähemärki!";
+    } elseif($_POST["password"] !== $_POST["confirmpassword"]) {
+      $confirmpasswordError = "Salasõna kordus on erinev kui salasõna!";
+    } else {
+  	  $passwordError = "Palun sisestage salasõna!";
     }
 
     if(isset($_POST["birthMonth"]) and !empty($_POST["birthMonth"])){
@@ -104,7 +132,7 @@
 	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	  <label>Eesnimi:</label><br>
 	  <input name="firstName" type="text" value="<?php echo $name; ?>"><span><?php echo $nameError; ?></span><br>
-      <label>Perekonnanimi:</label><br>
+    <label>Perekonnanimi:</label><br>
 	  <input name="surName" type="text" value="<?php echo $surname; ?>"><span><?php echo $surnameError; ?></span><br>
     <br>
     <input type="radio" name="gender" value="2" <?php if($gender == "2"){		echo " checked";} ?>><label>Naine</label>
