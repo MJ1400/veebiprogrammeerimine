@@ -30,6 +30,6 @@
   <p>See leht on loodud koolis õppetöö raames
   ja ei sisalda tõsiseltvõetavat sisu!</p>
   <hr>
-  <p><a href="?logout=1">Logi välja!</a> | <a href="userprofile.php">Kasutajaprofiil</a> | <a href="messages.php">Sõnumid</a> | <a href="changepassword.php">Muuda salasõna</a> | <a href="picupload.php">Piltide üleslaadimine</a> | <a href="showfilminfo.php">Filmid</a> </p>
+  <p><a href="?logout=1">Logi välja!</a> | <a href="userprofile.php">Kasutajaprofiil</a> | <a href="messages.php">Sõnumid</a> | <a href="changepassword.php">Muuda salasõna</a> | <a href="picupload.php">Piltide üleslaadimine</a> | <a href="showfilminfo.php">Filmid</a> | <a href="publicgallery.php">Pildigalerii</a> </p>
 </body>
 </html>

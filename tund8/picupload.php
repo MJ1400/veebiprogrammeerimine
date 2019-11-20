@@ -149,8 +149,16 @@ if ($uploadOk == 0) {
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
       <label>Vali üleslaetav pilt!</label>
       <br>
+      <br>
       <input type="file" name="fileToUpload" id="fileToUpload">
-      <hr>
+      <br>
+      <br>
+      <label>Privaatsus:</label>
+      <input type="radio" name="privacy" value="1" checked="checked"><label>Avalik</label>
+      <input type="radio" name="privacy" value="2"><label>Sisseloginud kasutajatele</label>
+      <input type="radio" name="privacy" value="3"><label>Privaatne</label>
+      <br>
+      <br>
   	  <input name="submitPic" type="submit" value="Lae pilt üles!"><span><?php echo $notice; ?></span>
   	</form>
     <hr>
