@@ -14,6 +14,7 @@ window.onload = function(){
 	}
 	document.getElementById("close").addEventListener("click", closeModal);
 	document.getElementById("storeRating").addEventListener("click", storeRating);
+	document.getElementById("edit").addEventListener("click", editModal);
 }
 
 function storeRating(){
@@ -29,13 +30,16 @@ function storeRating(){
 		let webRequest = new XMLHttpRequest();
 		webRequest.onreadystatechange = function(){
 			if(this.readyState == 4 && this.status == 200){
-				console.log("Edu: " + this.responseText);
+				//console.log("Edu: " + this.responseText);
+				document.getElementById("avgRating").innerHTML = "Keskmine hinne: " + this.responseText;
+				document.getElementById("score" + photoId).innerHTML = "Hinne: " + this.responseText;
 			}
 		}
-		webRequest.open("GET", "savePhotoRating.php?rating=" + rating, true);
+		webRequest.open("GET", "savePhotoRating.php?rating=" + rating + "&photoid=" + photoId, true);
 		webRequest.send();
 	}
 }
+
 
 function openModal(e){
 	//console.log(e);
@@ -45,5 +49,9 @@ function openModal(e){
 }
 
 function closeModal(){
+	modal.style.display = "none";
+}
+
+function editModal(){
 	modal.style.display = "none";
 }

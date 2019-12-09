@@ -7,6 +7,12 @@
   //võtan kasutusele oma klassi
   //require("classes/Test.classes.php");
   $database = "if19_marten_vp";
+
+  //SESSIOON
+  require("classes/Session.class.php");
+  //sessioon mis katkeb, kui brauser suletakse ja on kättesaadav ainult meie domeenis, meie lehel
+  SessionManager::sessionStart("vp", 0, "/~martejur/", "greeny.cs.tlu.ee");
+  
   //kui pole sisseloginud
   if(!isset($_SESSION["userID"])){
   	  //siis jõuga sisselogimise lehele
@@ -54,6 +60,7 @@
     $userThumbsHTML = readAllPublicPicsPage(2, $page, $limit);
     $privateThumbsHTML = readAllPublicPicsPage(3, $page, $limit);
 
+
   //<link rel="stylesheet" type="text/css" href="style/modal.css">
   $toScript = "\t" .'<link rel="stylesheet" type="text/css" href="style/modal.css">' ."\n";
   $toScript .= "\t" .'<script type="text/javascript" src="javascript/modal.js"></script>';
@@ -74,19 +81,31 @@
     <!-- Teeme moodalakna, W3Schools eeskuju-->
     <div id="myModal" class="modal">
 	<!--Sulgemisnupp-->
-	<span id="close" class="close">&times;</span>
-	<!--pildikoht-->
-	<img id="modalImg" class="modal-content">
-	<div id="caption"></div>
+	    <span id="close" class="close">&times;</span>
+      <span id="edit" class="edit">&amp;</span>
+	     <!--pildikoht-->
+	   <img id="modalImg" class="modal-content">
+	   <div id="caption"></div>
 
-	<div id="rating" class="modalcaption">
-		<label><input id="rate1" name="rating" type="radio" value="1">1</label>
-		<label><input id="rate2" name="rating" type="radio" value="2">2</label>
-		<label><input id="rate3" name="rating" type="radio" value="3">3</label>
-		<label><input id="rate4" name="rating" type="radio" value="4">4</label>
-		<label><input id="rate5" name="rating" type="radio" value="5">5</label>
-		<input type="button" value="Salvesta hinnang" id="storeRating">
-	</div>
+     <div id="rating" class="modalcaption">
+   		<label><input id="rate1" name="rating" type="radio" value="1">1</label>
+   		<label><input id="rate2" name="rating" type="radio" value="2">2</label>
+   		<label><input id="rate3" name="rating" type="radio" value="3">3</label>
+   		<label><input id="rate4" name="rating" type="radio" value="4">4</label>
+   		<label><input id="rate5" name="rating" type="radio" value="5">5</label>
+   		<input type="button" value="Salvesta hinnang" id="storeRating">
+   		<br>
+   		<span id="avgRating"></span>
+   	</div>
+
+  <!-- Pildi altteksti ja privaatsuse muutmise div -->
+  <div id="changeAlttext" class="modalcaption">
+    <label><input id="alttext" name="alttext" type="text">Muuda pildikirjeldust</label> <br>
+    <label><input type="radio" name="privacy" value="1" id="privacy1"> Avalikud pildid <label><br>
+    <label> <input type="radio" name="privacy" value="2" id="privacy2"> Kasutajate pildid <label> <br>
+    <label><input type="radio" name="privacy" value="3" id="privacy3"> Privaatsed pildid<label> <br>
+    <input type="button" value="Salvesta kirjeldus ja privaatsus" id="savePicChanges">
+  </div>
 
   </div>
 
@@ -103,18 +122,17 @@
     <p>
       <!-- <a href="?page=1">Leht 1 </a> <a href="?page=2">Leht 2 </a> -->
     <?php
-      if($page > 1) {
-        echo '<a href="?page=' .($page - 1) .'">Eelmine leht</a> | ' ."\n";
-      } else {
-        echo "<span>Eelmine leht</span> | \n";
-      }
-
-      if($page * $limit < $totalPics) {
-        echo '<a href="?page=' .($page + 1) .'">Järgmine leht</a>' ."\n";
-      } else {
-        echo "<span>Järgmine leht</span> | \n";
-      }
-     ?>
+    if($page > 1){
+      echo '<a href="?page=' .($page - 1) .'&privacy=' .$privacyValue .'">Eelmine leht</a> - ' ."\n";
+    }else{
+      echo "<span>Eelmine leht</span> - \n";
+    }
+    if($page * $limit < $totalPics) {
+      echo '<a href="?page=' .($page + 1) .'&privacy=' .$privacyValue .'">Järgmine leht</a>' ."\n";
+    }else{
+      echo "<span>Järgmine leht</span> \n";
+    }
+    ?>
     </p>
     <div id="gallery">
     <?php
@@ -126,7 +144,6 @@
       echo $privateThumbsHTML;
     }
      ?>
-	  <hr>
   </div>
   </body>
   </html>
